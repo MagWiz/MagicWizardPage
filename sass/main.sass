@@ -1,0 +1,185 @@
+@import "compass/reset"
+@import "compass" 
+
+
+// VARS
+// colors
+$dark : #0E1319
+$light : #EFEFE8
+$yellow : #FFD56B
+$blue : #87B7F2
+
+// dimensions
+$space : 20px
+
+//fonts
+@import url(http://fonts.googleapis.com/css?family=Montserrat:400,700)
+@import url(http://fonts.googleapis.com/css?family=Roboto:400,700,900,100italic,100,300,300italic,400italic,500italic,700italic,500,900italic)
+
+$font1 : "Montserrat"
+$font2 : "Roboto"
+
+// main
+$main-font-family : $font2
+$main-font-color : $light
+$main-font-size : 1em
+$main-font-line : 1.5em
+$main-font-weight : 400
+$main-background-color : $dark
+
+// headings
+$heading-font-family : $font1
+$heading-font-color : $light
+
+
+// grille
+$grid_width : 100%
+$grid_max_width : 980px // max width
+$grid_cols : 12 // cols number
+$grid_gut : 5% // gut width
+$grid_col : ($grid_width - ($grid_gut * ($grid_cols - 1))) / $grid_cols
+$class-col : col !default
+
+.wrap 
+	width: $grid_width
+	box-sizing: border-box
+	max-width: $grid_max_width
+	margin: 0 auto
+	background : transparent
+	&:after
+		content : ""
+		display: table
+		clear: both
+
+@for $i from 1 through $grid_cols
+	$j: $i - 1
+	.#{$class-col}-#{$i}
+		width: ($i * $grid_col) + ($j * $grid_gut)
+		float: left
+		margin: $space $grid_gut $space 0
+
+.screenshots img
+	width: 100%
+	box-sizing: border-box
+
+.last, .#{$class-col}-#{$grid_cols}
+	margin-right: 0!important
+
+.first
+	clear : left
+
+
+
+
+body
+	font-family : $main-font-family
+	font-size : $main-font-size
+	line-height : $main-font-line
+	color : $main-font-color
+	text-align: center
+	font-weight : $main-font-weight
+	background : $main-background-color
+	background-position : 100% 0
+	background-attachment : fixed
+	+background-size(cover)
+
+h1, h2, h3
+	text-transform : uppercase
+	font-family : $heading-font-family
+	font-weight : 400
+	line-height : 1em
+ 
+h1
+	font-size : 2em
+	padding : 2*$space 0
+	text-align: center
+
+h2
+	font-size : 1.1em
+	padding : 2*$space 0 $space 0
+	&.wizard
+		background: image-url("favicon.png") no-repeat 50% 0
+		padding-top: 42px
+
+a, a:hover, a:focus
+	color : $yellow
+	text-decoration: none
+	+transition-property(color, background-color)
+	+transition-duration(0.3s)
+
+	&.bouton 
+		background: transparent
+		display : inline-block
+		margin: $space
+		font-family: $heading-font-family
+		padding : $space/1.5 2*$space
+		color : $light
+		text-transform: uppercase
+		border : 1px solid $light
+		letter-spacing: 0.03em
+		font-size: 1.3em
+		line-height: 1.15em
+		&:hover
+			background-color: rgba(255,255,255,0.1)
+		span 
+			font-size: 60%
+			display: block
+
+a:hover
+	color : $blue
+
+em 
+	font-style : italic
+strong
+	font-weight: 900
+p, ul
+	padding : $space/2 0
+
+section
+	&:after
+		content: ""
+		clear: both
+		display: table
+
+.screenshots
+	@extend .wrap
+	li
+		margin-bottom : 3*$space/2
+		background : $light
+		line-height: 0
+		@extend .col-3
+.credits li
+	@extend .small
+	&:before, &:after
+		content: "★"
+		margin: 0 $space/2
+		@extend .colored
+
+.text-center
+	text-align : center
+.text-right
+	text-align: right
+.text-left
+	text-align: left
+.small
+	font-size : 80%
+	line-height: 1.8em
+.colored
+	color: #3E403B
+
+.slide
+	padding : 2*$space 0 4*$space 0
+	&.head
+		background : image-url("bg.jpg") 100% 100%
+		+background-size(cover)
+
+	&.ground
+		background : image-url("bg2.jpg")
+		img 
+			border: 2px solid $light
+
+	&.dark
+		background: $dark
+
+
+@import "part/_responsive" 
